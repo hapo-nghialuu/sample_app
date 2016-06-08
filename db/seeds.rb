@@ -1,6 +1,6 @@
 User.create!(name:  "Clone User",
-             email: "Clone@railsmail.org",
-             birthday: "06/02/2016",
+             email: "rails@rmail.com",
+             birthday: "01/01/2016",
              password:              "123456",
              password_confirmation: "123456",
              admin: true,
@@ -26,3 +26,10 @@ users = User.order(:created_at).take(6)
   content = Faker::Lorem.sentence(5)
   users.each { |user| user.microposts.create!(content: content) }
 end
+
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
